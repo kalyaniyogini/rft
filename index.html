@@ -1,0 +1,322 @@
+import React, { useState } from 'react';
+import { 
+  Activity, 
+  Droplets, 
+  Beaker, 
+  AlertCircle, 
+  Info, 
+  ArrowRight, 
+  CheckCircle2, 
+  Dna,
+  Layers,
+  Wind,
+  ShieldCheck,
+  HeartPulse,
+  Thermometer,
+  Zap,
+  Microscope
+} from 'lucide-react';
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('blood');
+
+  const bloodMetrics = [
+    {
+      name: "eGFR",
+      full: "Estimated Glomerular Filtration Rate",
+      value: "≥ 90",
+      unit: "mL/min/1.73m²",
+      desc: "The gold standard for measuring how well kidneys filter waste. Adjusted for age and sex.",
+      status: "Healthy",
+      color: "text-emerald-600",
+      bg: "bg-emerald-50"
+    },
+    {
+      name: "Creatinine",
+      full: "Serum Creatinine",
+      value: "0.6 – 1.2",
+      unit: "mg/dL",
+      desc: "Waste product from muscle breakdown; the primary marker for calculating eGFR.",
+      status: "Normal Range",
+      color: "text-blue-600",
+      bg: "bg-blue-50"
+    },
+    {
+      name: "BUN",
+      full: "Blood Urea Nitrogen",
+      value: "7 – 20",
+      unit: "mg/dL",
+      desc: "Measures urea nitrogen. Ratios of BUN:Creatinine can help locate the site of kidney injury.",
+      status: "Normal Range",
+      color: "text-indigo-600",
+      bg: "bg-indigo-50"
+    }
+  ];
+
+  const electrolyteMetrics = [
+    {
+      name: "Sodium",
+      full: "Na+",
+      value: "135 – 145",
+      unit: "mEq/L",
+      desc: "Vital for fluid balance. Abnormalities (Hyponatremia) often indicate water retention issues.",
+      status: "Essential",
+      color: "text-orange-600",
+      bg: "bg-orange-50"
+    },
+    {
+      name: "Potassium",
+      full: "K+",
+      value: "3.5 – 5.0",
+      unit: "mEq/L",
+      desc: "Crucial for heart rhythm. High levels (Hyperkalemia) are a dangerous complication of kidney failure.",
+      status: "Critical",
+      color: "text-red-600",
+      bg: "bg-red-50"
+    },
+    {
+      name: "Bicarbonate",
+      full: "HCO3- (CO2)",
+      value: "22 – 28",
+      unit: "mEq/L",
+      desc: "Reflects the kidney's role in acid-base balance. Low levels indicate Metabolic Acidosis.",
+      status: "Balance",
+      color: "text-purple-600",
+      bg: "bg-purple-50"
+    }
+  ];
+
+  const urineMetrics = [
+    {
+      name: "uACR",
+      full: "Urine Albumin-to-Creatinine Ratio",
+      value: "< 30",
+      unit: "mg/g",
+      desc: "Checks for albumin leakage; indicates the integrity of the glomerular basement membrane.",
+      status: "Optimal",
+      color: "text-teal-600",
+      bg: "bg-teal-50"
+    },
+    {
+      name: "Specific Gravity",
+      full: "Concentration Power",
+      value: "1.005 – 1.030",
+      unit: "Ratio",
+      desc: "Measures the kidney's ability to concentrate urine based on hydration status.",
+      status: "Concentration",
+      color: "text-cyan-600",
+      bg: "bg-cyan-50"
+    }
+  ];
+
+  const ckdStages = [
+    { stage: 1, range: "≥ 90", label: "Normal / High", color: "bg-emerald-500", desc: "Kidney damage with normal function. Focus on risk control." },
+    { stage: 2, range: "60-89", label: "Mild Decrease", color: "bg-green-400", desc: "Mild loss of function. Monitor progression closely." },
+    { stage: 3, range: "30-59", label: "Moderate Decrease", color: "bg-amber-400", desc: "Moderate loss. Complications like anemia or bone disease may start." },
+    { stage: 4, range: "15-29", label: "Severe Decrease", color: "bg-orange-500", desc: "Severe loss. Preparation for kidney replacement therapy usually begins." },
+    { stage: 5, range: "< 15", label: "Kidney Failure", color: "bg-red-600", desc: "End-stage renal disease (ESRD). Dialysis or transplant required." }
+  ];
+
+  const kidneyFunctions = [
+    { icon: <Wind className="w-5 h-5" />, title: "Waste Excretion", text: "Removing urea, uric acid, and creatinine from blood." },
+    { icon: <HeartPulse className="w-5 h-5" />, title: "BP Regulation", text: "Using the RAAS system to manage systemic blood pressure." },
+    { icon: <ShieldCheck className="w-5 h-5" />, title: "Hormone Production", text: "Producing Erythropoietin (RBCs) and Vitamin D (Bones)." },
+    { icon: <Thermometer className="w-5 h-5" />, title: "pH Balance", text: "Regulating acidity by reabsorbing bicarbonate and secreting H+." }
+  ];
+
+  const currentMetrics = activeTab === 'blood' ? bloodMetrics : activeTab === 'electrolytes' ? electrolyteMetrics : urineMetrics;
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-900">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Top Header Section */}
+        <header className="mb-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+          <div className="text-center md:text-left">
+            <div className="inline-flex items-center px-3 py-1 bg-blue-100 rounded-full mb-4">
+              <Microscope className="w-4 h-4 text-blue-600 mr-2" />
+              <span className="text-blue-700 font-bold uppercase tracking-wider text-[10px]">Clinical Reference Guide</span>
+            </div>
+            <h1 className="text-4xl font-extrabold text-slate-800 mb-2">Renal Function Profile</h1>
+            <p className="text-slate-500 max-w-xl">
+              A comprehensive evaluation of the kidneys' multi-faceted roles in filtration, metabolic balance, and endocrine health.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+            {kidneyFunctions.map((f, i) => (
+              <div key={i} className="flex items-center space-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                <div className="text-blue-500">{f.icon}</div>
+                <div className="text-[10px] font-bold text-slate-700 uppercase leading-tight">{f.title}</div>
+              </div>
+            ))}
+          </div>
+        </header>
+
+        {/* Tab Selection */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-white p-1 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap justify-center sm:flex-nowrap gap-1">
+            {['blood', 'electrolytes', 'urine'].map((tab) => (
+              <button 
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-8 py-2.5 rounded-xl font-bold text-sm capitalize transition-all ${activeTab === tab ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:bg-slate-50'}`}
+              >
+                {tab === 'blood' ? 'Core Blood' : tab === 'electrolytes' ? 'Electrolytes' : 'Urine Analysis'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Dynamic Metric Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {currentMetrics.map((m, idx) => (
+            <div key={idx} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-blue-500">
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div className={`p-2 rounded-xl ${m.bg}`}>
+                     {activeTab === 'blood' ? <Beaker className={`w-5 h-5 ${m.color}`} /> : activeTab === 'electrolytes' ? <Zap className={`w-5 h-5 ${m.color}`} /> : <Droplets className={`w-5 h-5 ${m.color}`} />}
+                  </div>
+                  <span className={`text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase ${m.bg} ${m.color}`}>
+                    {m.status}
+                  </span>
+                </div>
+                <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">{m.name}</h3>
+                <h4 className="text-sm font-bold text-slate-800 mb-4">{m.full}</h4>
+                <div className="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
+                  <span className="text-3xl font-black text-slate-900">{m.value}</span>
+                  <span className="ml-2 text-xs text-slate-500 font-bold uppercase tracking-widest">{m.unit}</span>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed min-h-[40px]">
+                  {m.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Enhanced CKD Staging Section */}
+        <section className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full -mr-32 -mt-32"></div>
+          
+          <div className="relative z-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+              <div>
+                <h2 className="text-3xl font-black text-slate-800 mb-2">The CKD Spectrum</h2>
+                <p className="text-slate-500 max-w-lg">Stages of Chronic Kidney Disease are defined by the eGFR, determining the intensity of clinical intervention needed.</p>
+              </div>
+              <div className="bg-amber-50 border border-amber-100 px-4 py-2 rounded-2xl flex items-center">
+                <AlertCircle className="w-4 h-4 text-amber-600 mr-2" />
+                <span className="text-xs font-bold text-amber-800">Stages 3-5 require specialist consultation</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              {ckdStages.map((s) => (
+                <div key={s.stage} className="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
+                  <div className={`w-12 h-12 rounded-2xl ${s.color} text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+                    {s.stage}
+                  </div>
+                  <div className="mb-4">
+                    <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
+                    <div className="text-2xl font-black text-slate-800">{s.range}</div>
+                  </div>
+                  <div className="text-xs font-black text-slate-700 uppercase mb-3">{s.label}</div>
+                  <p className="text-[11px] text-slate-500 leading-normal italic">
+                    {s.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Clinical Deep Dive Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Albuminuria Explanation */}
+          <div className="lg:col-span-2 bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden group">
+            <div className="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-125 transition-transform duration-700">
+              <Activity className="w-64 h-64 text-white" />
+            </div>
+            <div className="relative z-10">
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-blue-500/20 rounded-2xl mr-4">
+                  <Info className="w-6 h-6 text-blue-400" />
+                </div>
+                <h3 className="text-2xl font-bold">The Filter & The Seal</h3>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-10">
+                <div>
+                  <h4 className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Filtration (eGFR)</h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Think of your kidneys as a sieve. A low eGFR means the sieve is <strong>clogged</strong>—waste products like creatinine are staying in the blood instead of moving into the urine.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3">Permeability (Albumin)</h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Albuminuria means the sieve has <strong>holes</strong>. Healthy kidneys keep large protein molecules in the blood. If they leak into urine, the "seal" of the kidney is failing.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-10 pt-8 border-t border-white/10 flex items-center justify-between">
+                <div className="text-xs font-medium text-slate-400 max-w-sm">
+                  <strong>Clinical Note:</strong> A patient can have a normal eGFR (90+) but still have significant Kidney Disease if Albuminuria is present.
+                </div>
+                <Dna className="w-8 h-8 text-white/20" />
+              </div>
+            </div>
+          </div>
+
+          {/* Indicators for Testing */}
+          <div className="bg-white rounded-[2.5rem] p-10 border border-slate-200 shadow-sm">
+             <h3 className="text-xl font-bold mb-6 flex items-center text-slate-800 underline underline-offset-8 decoration-orange-400">
+               Who Should Test?
+             </h3>
+             <div className="space-y-6">
+               {[
+                 { title: "Diabetes", desc: "High blood sugar damages small vessels in the kidney over time.", risk: "High" },
+                 { title: "Hypertension", desc: "High pressure scars the kidney's delicate filtration units.", risk: "High" },
+                 { title: "Family History", desc: "Genetic predispositions like Polycystic Kidney Disease.", risk: "Moderate" },
+                 { title: "Elderly (65+)", desc: "Natural decline in filtration rate occurs with aging.", risk: "Routine" }
+               ].map((item, i) => (
+                 <div key={i} className="group cursor-default">
+                   <div className="flex items-center justify-between mb-1">
+                     <span className="text-sm font-black text-slate-700">{item.title}</span>
+                     <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded ${item.risk === 'High' ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-500'}`}>{item.risk} Risk</span>
+                   </div>
+                   <p className="text-xs text-slate-500 leading-tight group-hover:text-slate-800 transition-colors">{item.desc}</p>
+                 </div>
+               ))}
+             </div>
+             
+             <div className="mt-8 pt-6 border-t border-slate-100">
+               <div className="flex items-center text-orange-600 text-xs font-bold uppercase tracking-tighter">
+                 <AlertCircle className="w-3 h-3 mr-2" />
+                 Red Flag Symptoms
+               </div>
+               <p className="text-[10px] text-slate-400 mt-2 italic">Foamy urine, swelling in ankles (edema), fatigue, or unexplained itching.</p>
+             </div>
+          </div>
+        </div>
+
+        {/* Fine Print Footer */}
+        <footer className="mt-16 text-center text-slate-400 text-xs pb-12">
+          <div className="flex flex-wrap justify-center gap-6 mb-4">
+             <span className="flex items-center"><CheckCircle2 className="w-3 h-3 mr-1 text-emerald-500" /> Fasting not usually required</span>
+             <span className="flex items-center"><CheckCircle2 className="w-3 h-3 mr-1 text-emerald-500" /> Standard venous draw</span>
+             <span className="flex items-center"><CheckCircle2 className="w-3 h-3 mr-1 text-emerald-500" /> Results within 24-48hrs</span>
+          </div>
+          <p className="max-w-2xl mx-auto">
+            This dashboard is for educational purposes. Results must be interpreted in the context of the patient's full clinical history, including age, weight, and existing comorbidities.
+          </p>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+export default App;
