@@ -3,371 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renal Function Profile Infographic</title>
+    <title>Renal Function Tests - Lecture Notes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .tab-content { display: none; }
-        .tab-content.active { display: grid; }
-        .tab-button.active { 
-            background-color: #2563eb; 
-            color: white; 
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --primary: #1e40af;
+            --accent: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .academic-font {
+            font-family: 'Merriweather', serif;
+        }
+
+        .formula-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .content-box { border: none; box-shadow: none; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
+<body class="bg-slate-50">
 
-    <div class="max-w-6xl mx-auto p-4 md:p-8">
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 no-print">
+        <div class="max-w-4xl mx-auto px-6 py-8 flex justify-between items-center">
+            <div>
+                <span class="text-blue-600 font-bold text-xs uppercase tracking-widest">Clinical Biochemistry</span>
+                <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Renal Function Tests (RFT)</h1>
+                <p class="text-slate-500 text-sm mt-2 italic">Comprehensive Study Notes for BSc Students</p>
+            </div>
+            <button onclick="window.print()" class="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors text-sm font-semibold">
+                <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print Notes
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
         
-        <!-- Top Header Section -->
-        <header class="mb-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-            <div class="text-center md:text-left">
-                <div class="inline-flex items-center px-3 py-1 bg-blue-100 rounded-full mb-4">
-                    <i data-lucide="microscope" class="w-4 h-4 text-blue-600 mr-2"></i>
-                    <span class="text-blue-700 font-bold uppercase tracking-wider text-[10px]">Clinical Reference Guide</span>
-                </div>
-                <h1 class="text-4xl font-extrabold text-slate-800 mb-2">Renal Function Profile</h1>
-                <p class="text-slate-500 max-w-xl text-sm md:text-base">
-                    A comprehensive evaluation of the kidneys' multi-faceted roles in filtration, metabolic balance, and endocrine health.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
-                <div class="flex items-center space-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <i data-lucide="wind" class="w-5 h-5 text-blue-500"></i>
-                    <div class="text-[10px] font-bold text-slate-700 uppercase leading-tight">Waste Excretion</div>
-                </div>
-                <div class="flex items-center space-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <i data-lucide="heart-pulse" class="w-5 h-5 text-blue-500"></i>
-                    <div class="text-[10px] font-bold text-slate-700 uppercase leading-tight">BP Regulation</div>
-                </div>
-                <div class="flex items-center space-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <i data-lucide="shield-check" class="w-5 h-5 text-blue-500"></i>
-                    <div class="text-[10px] font-bold text-slate-700 uppercase leading-tight">Hormones</div>
-                </div>
-                <div class="flex items-center space-x-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <i data-lucide="thermometer" class="w-5 h-5 text-blue-500"></i>
-                    <div class="text-[10px] font-bold text-slate-700 uppercase leading-tight">pH Balance</div>
-                </div>
-            </div>
-        </header>
+        <!-- Table of Contents -->
+        <nav class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-12 no-print">
+            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center">
+                <i data-lucide="list" class="w-4 h-4 mr-2"></i> Table of Contents
+            </h2>
+            <ul class="grid md:grid-cols-2 gap-x-8 gap-y-2 text-blue-600 font-medium text-sm">
+                <li><a href="#intro" class="hover:underline">1. Introduction to Renal Physiology</a></li>
+                <li><a href="#glomerular" class="hover:underline">2. Glomerular Function Assessment</a></li>
+                <li><a href="#tubular" class="hover:underline">3. Tubular Function Assessment</a></li>
+                <li><a href="#proteinuria" class="hover:underline">4. Proteinuria: The Clinical "Leak"</a></li>
+                <li><a href="#ckd" class="hover:underline">5. Clinical Correlation: CKD Stages</a></li>
+                <li><a href="#summary" class="hover:underline">6. Summary for Students</a></li>
+            </ul>
+        </nav>
 
-        <!-- Tab Selection -->
-        <div class="flex justify-center mb-8">
-            <div class="bg-white p-1 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap justify-center sm:flex-nowrap gap-1">
-                <button onclick="switchTab('blood')" id="btn-blood" class="tab-button active px-8 py-2.5 rounded-xl font-bold text-sm capitalize transition-all">
-                    Core Blood
-                </button>
-                <button onclick="switchTab('electrolytes')" id="btn-electrolytes" class="tab-button px-8 py-2.5 rounded-xl font-bold text-sm capitalize transition-all text-slate-500 hover:bg-slate-50">
-                    Electrolytes
-                </button>
-                <button onclick="switchTab('urine')" id="btn-urine" class="tab-button px-8 py-2.5 rounded-xl font-bold text-sm capitalize transition-all text-slate-500 hover:bg-slate-50">
-                    Urine Analysis
-                </button>
+        <!-- Section 1 -->
+        <section id="intro" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4">1</div>
+                <h2 class="text-2xl font-bold text-slate-800">Introduction to Renal Physiology</h2>
             </div>
-        </div>
-
-        <!-- Dynamic Metric Grids -->
-        <div id="content-blood" class="tab-content active grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <!-- eGFR -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-emerald-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-emerald-50"><i data-lucide="beaker" class="w-5 h-5 text-emerald-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-emerald-50 text-emerald-600">Healthy</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">eGFR</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Estimated Glomerular Filtration Rate</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">≥ 90</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mL/min/1.73m²</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">The gold standard for measuring filtration. Adjusted for age and sex.</p>
-            </div>
-            <!-- Creatinine -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-blue-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-blue-50"><i data-lucide="beaker" class="w-5 h-5 text-blue-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-blue-50 text-blue-600">Normal Range</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">Creatinine</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Serum Creatinine</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">0.6 – 1.2</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mg/dL</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Waste product from muscle breakdown; primary marker for calculating eGFR.</p>
-            </div>
-            <!-- BUN -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-indigo-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-indigo-50"><i data-lucide="beaker" class="w-5 h-5 text-indigo-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-indigo-50 text-indigo-600">Normal Range</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">BUN</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Blood Urea Nitrogen</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">7 – 20</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mg/dL</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Measures urea nitrogen; helps locate site of injury via BUN:Cr ratio.</p>
-            </div>
-        </div>
-
-        <div id="content-electrolytes" class="tab-content grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <!-- Sodium -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-orange-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-orange-50"><i data-lucide="zap" class="w-5 h-5 text-orange-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-orange-50 text-orange-600">Essential</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">Sodium</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Na+</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">135 – 145</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mEq/L</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Vital for fluid balance. Abnormalities indicate water retention issues.</p>
-            </div>
-            <!-- Potassium -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-red-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-red-50"><i data-lucide="zap" class="w-5 h-5 text-red-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-red-50 text-red-600">Critical</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">Potassium</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">K+</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">3.5 – 5.0</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mEq/L</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Crucial for heart rhythm. High levels are a dangerous failure symptom.</p>
-            </div>
-            <!-- Bicarbonate -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-purple-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-purple-50"><i data-lucide="zap" class="w-5 h-5 text-purple-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-purple-50 text-purple-600">Balance</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">Bicarbonate</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">HCO3- (CO2)</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">22 – 28</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mEq/L</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Reflects kidney's role in pH balance. Low levels indicate Acidosis.</p>
-            </div>
-        </div>
-
-        <div id="content-urine" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <!-- uACR -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-teal-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-teal-50"><i data-lucide="droplets" class="w-5 h-5 text-teal-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-teal-50 text-teal-600">Optimal</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">uACR</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Albumin-to-Creatinine Ratio</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">&lt; 30</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">mg/g</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Checks for protein leakage; indicates basement membrane integrity.</p>
-            </div>
-            <!-- Specific Gravity -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all relative overflow-hidden group border-b-4 border-b-cyan-500">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="p-2 rounded-xl bg-cyan-50"><i data-lucide="droplets" class="w-5 h-5 text-cyan-600"></i></div>
-                    <span class="text-[10px] font-black px-2 py-1 rounded-md tracking-tighter uppercase bg-cyan-50 text-cyan-600">Concentration</span>
-                </div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.15em] mb-1">Specific Gravity</h3>
-                <h4 class="text-sm font-bold text-slate-800 mb-4">Concentration Power</h4>
-                <div class="flex items-baseline mb-4 bg-slate-50 p-3 rounded-2xl">
-                    <span class="text-3xl font-black text-slate-900">1.005 - 1.03</span>
-                    <span class="ml-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">Ratio</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed min-h-[40px]">Measures kidney's ability to concentrate urine based on hydration.</p>
-            </div>
-        </div>
-
-        <!-- Enhanced CKD Staging Section -->
-        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-12 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full -mr-32 -mt-32"></div>
-            
-            <div class="relative z-10">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                    <div>
-                        <h2 class="text-3xl font-black text-slate-800 mb-2">The CKD Spectrum</h2>
-                        <p class="text-slate-500 max-w-lg text-sm">Stages of Chronic Kidney Disease are defined by eGFR, determining the intensity of intervention.</p>
+            <div class="academic-font text-lg text-slate-700 space-y-4">
+                <p>The kidneys are the primary organs for maintaining the internal environment (<em>homeostasis</em>). For a Biochemistry student, the kidney is viewed as a complex biological filter and endocrine organ.</p>
+                <div class="grid md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-blue-800 mb-2">Ultrafiltration</h3>
+                        <p class="text-sm text-slate-600">Occurs at the glomerulus where blood is filtered under pressure.</p>
                     </div>
-                    <div class="bg-amber-50 border border-amber-100 px-4 py-2 rounded-2xl flex items-center">
-                        <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 mr-2"></i>
-                        <span class="text-xs font-bold text-amber-800">Stages 3-5 require specialist consultation</span>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-blue-800 mb-2">Tubular Reabsorption</h3>
+                        <p class="text-sm text-slate-600">Essential solutes like glucose and amino acids are reclaimed.</p>
                     </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                    <!-- Stage 1 -->
-                    <div class="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg">1</div>
-                        <div class="mb-4">
-                            <div class="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
-                            <div class="text-2xl font-black text-slate-800">≥ 90</div>
-                        </div>
-                        <div class="text-xs font-black text-slate-700 uppercase mb-3">Normal / High</div>
-                        <p class="text-[11px] text-slate-500 leading-normal italic">Kidney damage with normal function.</p>
-                    </div>
-                    <!-- Stage 2 -->
-                    <div class="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
-                        <div class="w-12 h-12 rounded-2xl bg-green-400 text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg">2</div>
-                        <div class="mb-4">
-                            <div class="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
-                            <div class="text-2xl font-black text-slate-800">60-89</div>
-                        </div>
-                        <div class="text-xs font-black text-slate-700 uppercase mb-3">Mild Decrease</div>
-                        <p class="text-[11px] text-slate-500 leading-normal italic">Mild loss of kidney function.</p>
-                    </div>
-                    <!-- Stage 3 -->
-                    <div class="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-400 text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg">3</div>
-                        <div class="mb-4">
-                            <div class="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
-                            <div class="text-2xl font-black text-slate-800">30-59</div>
-                        </div>
-                        <div class="text-xs font-black text-slate-700 uppercase mb-3">Moderate</div>
-                        <p class="text-[11px] text-slate-500 leading-normal italic">Complications like anemia may start.</p>
-                    </div>
-                    <!-- Stage 4 -->
-                    <div class="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
-                        <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg">4</div>
-                        <div class="mb-4">
-                            <div class="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
-                            <div class="text-2xl font-black text-slate-800">15-29</div>
-                        </div>
-                        <div class="text-xs font-black text-slate-700 uppercase mb-3">Severe</div>
-                        <p class="text-[11px] text-slate-500 leading-normal italic">Preparation for replacement therapy.</p>
-                    </div>
-                    <!-- Stage 5 -->
-                    <div class="flex flex-col h-full bg-slate-50/50 rounded-3xl p-5 border border-transparent hover:border-slate-200 transition-colors group">
-                        <div class="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center font-black text-xl mb-4 shadow-lg">5</div>
-                        <div class="mb-4">
-                            <div class="text-[10px] font-bold text-slate-400 uppercase mb-1">eGFR Range</div>
-                            <div class="text-2xl font-black text-slate-800">&lt; 15</div>
-                        </div>
-                        <div class="text-xs font-black text-slate-700 uppercase mb-3">Failure</div>
-                        <p class="text-[11px] text-slate-500 leading-normal italic">Dialysis or transplant required (ESRD).</p>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-blue-800 mb-2">Tubular Secretion</h3>
+                        <p class="text-sm text-slate-600">Waste products and ions ($H^+$, $K^+$) are actively secreted.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Clinical Deep Dive Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden group">
-                <div class="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-125 transition-transform duration-700">
-                    <i data-lucide="activity" class="w-64 h-64"></i>
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center mb-6">
-                        <div class="p-3 bg-blue-500/20 rounded-2xl mr-4">
-                            <i data-lucide="info" class="w-6 h-6 text-blue-400"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold">The Filter & The Seal</h3>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-10">
-                        <div>
-                            <h4 class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Filtration (eGFR)</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                Think of your kidneys as a sieve. A low eGFR means the sieve is <strong>clogged</strong>—waste products like creatinine stay in the blood instead of moving to urine.
-                            </p>
-                        </div>
-                        <div>
-                            <h4 class="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3">Permeability (Albumin)</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                Albuminuria means the sieve has <strong>holes</strong>. Healthy kidneys keep protein in the blood. If they leak into urine, the "seal" of the kidney is failing.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-10 pt-8 border-t border-white/10 flex items-center justify-between">
-                        <div class="text-xs font-medium text-slate-400 max-w-sm">
-                            <strong>Clinical Note:</strong> A patient can have a normal eGFR (90+) but still have significant disease if Albuminuria is present.
-                        </div>
-                        <i data-lucide="dna" class="w-8 h-8 text-white/20"></i>
-                    </div>
-                </div>
+        <!-- Section 2 -->
+        <section id="glomerular" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4">2</div>
+                <h2 class="text-2xl font-bold text-slate-800">Assessment of Glomerular Function</h2>
             </div>
+            
+            <div class="space-y-6">
+                <p class="text-slate-700">Glomerular function is assessed by measuring the <strong>Glomerular Filtration Rate (GFR)</strong>.</p>
+                
+                <h3 class="text-xl font-semibold text-slate-800">A. Non-Protein Nitrogenous (NPN) Compounds</h3>
+                
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <h4 class="font-bold text-blue-700 mb-2 flex items-center">
+                        <i data-lucide="beaker" class="w-4 h-4 mr-2"></i> Serum Creatinine
+                    </h4>
+                    <ul class="list-disc ml-6 text-slate-600 space-y-2 text-sm md:text-base">
+                        <li><strong>Biochemistry:</strong> Derived from <strong>Creatine Phosphate</strong> in muscle metabolism.</li>
+                        <li><strong>Clinical Significance:</strong> Produced at a constant rate proportional to muscle mass. Freely filtered and not reabsorbed.</li>
+                        <li><strong>The Inverse Relationship:</strong> If GFR decreases by 50%, serum creatinine roughly doubles.</li>
+                    </ul>
+                </div>
 
-            <div class="bg-white rounded-[2.5rem] p-10 border border-slate-200 shadow-sm">
-                <h3 class="text-xl font-bold mb-6 flex items-center text-slate-800 underline underline-offset-8 decoration-orange-400">
-                    Who Should Test?
-                </h3>
-                <div class="space-y-6">
-                    <div class="group">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-sm font-black text-slate-700">Diabetes</span>
-                            <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600">High Risk</span>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-tight group-hover:text-slate-800 transition-colors">High blood sugar damages small vessels in the kidney over time.</p>
-                    </div>
-                    <div class="group">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-sm font-black text-slate-700">Hypertension</span>
-                            <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600">High Risk</span>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-tight group-hover:text-slate-800 transition-colors">High pressure scars the kidney's delicate filtration units.</p>
-                    </div>
-                    <div class="group">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-sm font-black text-slate-700">Family History</span>
-                            <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-slate-50 text-slate-500">Moderate Risk</span>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-tight group-hover:text-slate-800 transition-colors">Genetic predispositions like Polycystic Kidney Disease.</p>
-                    </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <h4 class="font-bold text-blue-700 mb-2 flex items-center">
+                        <i data-lucide="activity" class="w-4 h-4 mr-2"></i> Blood Urea Nitrogen (BUN)
+                    </h4>
+                    <ul class="list-disc ml-6 text-slate-600 space-y-2 text-sm md:text-base">
+                        <li><strong>Biochemistry:</strong> Urea is the end product of protein catabolism, synthesized in the <strong>Liver</strong> via the Urea Cycle.</li>
+                        <li><strong>Limitation:</strong> Affected by diet, dehydration, and tissue breakdown.</li>
+                        <li><strong>BUN/Creatinine Ratio:</strong> High ratios (>20:1) suggest <em>Pre-renal</em> causes like dehydration.</li>
+                    </ul>
                 </div>
-                <div class="mt-8 pt-6 border-t border-slate-100">
-                    <div class="flex items-center text-orange-600 text-xs font-bold uppercase tracking-tighter">
-                        <i data-lucide="alert-circle" class="w-3 h-3 mr-2"></i> Red Flag Symptoms
-                    </div>
-                    <p class="text-[10px] text-slate-400 mt-2 italic">Foamy urine, swelling in ankles (edema), fatigue, or unexplained itching.</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Footer -->
-        <footer class="mt-16 text-center text-slate-400 text-xs pb-12">
-            <div class="flex flex-wrap justify-center gap-6 mb-4">
-                <span class="flex items-center"><i data-lucide="check-circle-2" class="w-3 h-3 mr-1 text-emerald-500"></i> Fasting not usually required</span>
-                <span class="flex items-center"><i data-lucide="check-circle-2" class="w-3 h-3 mr-1 text-emerald-500" /> Standard venous draw</span>
-                <span class="flex items-center"><i data-lucide="check-circle-2" class="w-3 h-3 mr-1 text-emerald-500" /> Results within 24-48hrs</span>
+                <h3 class="text-xl font-semibold text-slate-800 mt-8">B. Clearance Tests</h3>
+                <div class="formula-card p-8 rounded-2xl text-center shadow-inner">
+                    <p class="text-slate-500 text-xs font-bold uppercase mb-4 tracking-widest">Clearance Formula</p>
+                    <div class="text-2xl font-serif text-slate-900">
+                        $$Clearance (C) = \frac{U \times V}{P}$$
+                    </div>
+                    <div class="mt-6 grid grid-cols-3 gap-2 text-xs text-slate-500 font-medium">
+                        <div>$U$: Urine Conc.</div>
+                        <div>$V$: Urine Volume/min</div>
+                        <div>$P$: Plasma Conc.</div>
+                    </div>
+                </div>
             </div>
-            <p class="max-w-2xl mx-auto">This dashboard is for educational purposes. Results must be interpreted in clinical context by a professional.</p>
-        </footer>
-    </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="tubular" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4">3</div>
+                <h2 class="text-2xl font-bold text-slate-800">Assessment of Tubular Function</h2>
+            </div>
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 space-y-6">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+                        <i data-lucide="droplets" class="w-5 h-5 mr-2 text-cyan-600"></i> Specific Gravity & Osmolality
+                    </h3>
+                    <p class="text-slate-600 text-sm">Measures the kidney's power to concentrate urine. A fixed gravity of <strong>1.010 (Isosthenuria)</strong> indicates severe tubular failure.</p>
+                </div>
+                <div class="border-t pt-6">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+                        <i data-lucide="zap" class="w-5 h-5 mr-2 text-orange-500"></i> Electrolyte Regulation
+                    </h3>
+                    <p class="text-slate-600 text-sm">Kidneys regulate $Na^+$ (via Aldosterone) and $K^+$. In failure, <strong>Hyperkalemia</strong> becomes a clinical emergency.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="proteinuria" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4">4</div>
+                <h2 class="text-2xl font-bold text-slate-800">Proteinuria: The Clinical "Leak"</h2>
+            </div>
+            <div class="bg-blue-900 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <i data-lucide="info" class="absolute -bottom-10 -right-10 w-48 h-48 text-white opacity-5"></i>
+                <p class="text-blue-200 mb-6 italic">The healthy glomerular basement membrane is negatively charged, repelling albumin.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                        <h4 class="font-bold text-emerald-400 mb-1 uppercase text-xs tracking-widest">Microalbuminuria</h4>
+                        <p class="text-sm">$30–300 \text{ mg/day}$. Early sign of Diabetic Nephropathy.</p>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                        <h4 class="font-bold text-orange-400 mb-1 uppercase text-xs tracking-widest">Nephrotic Syndrome</h4>
+                        <p class="text-sm">$>3.5 \text{ g/day}$. Massive protein loss and edema.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="ckd" class="mb-16 scroll-mt-20">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold mr-4">5</div>
+                <h2 class="text-2xl font-bold text-slate-800">Chronic Kidney Disease (CKD)</h2>
+            </div>
+            <div class="overflow-hidden border border-slate-200 rounded-2xl">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-100 text-slate-600 uppercase font-bold text-[10px] tracking-widest">
+                        <tr>
+                            <th class="px-6 py-4">Stage</th>
+                            <th class="px-6 py-4">eGFR ($mL/min$)</th>
+                            <th class="px-6 py-4">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                        <tr><td class="px-6 py-4 font-bold text-blue-600">1</td><td class="px-6 py-4">$\geq 90$</td><td class="px-6 py-4">Damage with normal function</td></tr>
+                        <tr><td class="px-6 py-4 font-bold text-blue-600">2</td><td class="px-6 py-4">$60–89$</td><td class="px-6 py-4">Mild decrease in function</td></tr>
+                        <tr class="bg-blue-50"><td class="px-6 py-4 font-bold text-blue-700">3</td><td class="px-6 py-4">$30–59$</td><td class="px-6 py-4"><strong>Clinical Tipping Point</strong></td></tr>
+                        <tr><td class="px-6 py-4 font-bold text-blue-600">4</td><td class="px-6 py-4">$15–29$</td><td class="px-6 py-4">Severe decrease in function</td></tr>
+                        <tr class="bg-red-50"><td class="px-6 py-4 font-bold text-red-600">5</td><td class="px-6 py-4">$< 15$</td><td class="px-6 py-4 text-red-600 font-medium">Kidney Failure / ESRD</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="summary" class="mb-12 scroll-mt-20 bg-emerald-50 border border-emerald-100 rounded-2xl p-8">
+            <h2 class="text-xl font-bold text-emerald-800 mb-6 flex items-center">
+                <i data-lucide="check-circle" class="w-6 h-6 mr-2"></i> Summary for Students
+            </h2>
+            <ul class="space-y-4 text-emerald-900 font-medium">
+                <li class="flex items-center"><i data-lucide="arrow-right" class="w-4 h-4 mr-3 opacity-40"></i> Assess Filtration: Look at eGFR and Creatinine.</li>
+                <li class="flex items-center"><i data-lucide="arrow-right" class="w-4 h-4 mr-3 opacity-40"></i> Assess Early Damage: Look at uACR (Albuminuria).</li>
+                <li class="flex items-center"><i data-lucide="arrow-right" class="w-4 h-4 mr-3 opacity-40"></i> Assess Tubular Integrity: Look at Specific Gravity.</li>
+                <li class="flex items-center"><i data-lucide="arrow-right" class="w-4 h-4 mr-3 opacity-40"></i> Assess Balance: Look at Bicarbonate ($HCO_3^-$).</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-12 text-center">
+        <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-2">End of Lecture Notes</p>
+        <p class="text-slate-500 text-sm italic">Designed for Clinical Biochemistry Department &copy; 2024</p>
+    </footer>
 
     <script>
-        // Initialize Lucide Icons
+        // Initialize Icons
         lucide.createIcons();
-
-        function switchTab(tabId) {
-            // Hide all content
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            // Remove active style from all buttons
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.add('text-slate-500', 'hover:bg-slate-50');
-            });
-
-            // Show selected content
-            document.getElementById('content-' + tabId).classList.add('active');
-            // Style active button
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.add('active');
-            activeBtn.classList.remove('text-slate-500', 'hover:bg-slate-50');
-        }
     </script>
 </body>
 </html>
